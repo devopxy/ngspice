@@ -2,7 +2,7 @@ FROM alpine:3.7 as build
 
 LABEL maintainer="Mangesh Bhalerao <mangesh {at} devopxy {dot} com >"
 
-ENV NGSPICE_VERSION 27
+ENV NGSPICE_VERSION 28
 
 RUN echo $NGSPICE_VERSION
 
