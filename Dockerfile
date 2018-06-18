@@ -27,6 +27,10 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && ./configure \
     && make 
     
-    FROM alpine:3.7 as final
-    COPY --from=build /usr/src/ngspice-ngspice-$NGSPICE_VERSION /usr/src/ngspice-ngspice-$NGSPICE_VERSION
-    RUN cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION && make install && make clean
+FROM alpine:3.7 as final
+    
+ENV NGSPICE_VERSION 28
+    
+COPY --from=build /usr/src/ngspice-ngspice-$NGSPICE_VERSION /usr/src/ngspice-ngspice-$NGSPICE_VERSION
+    
+RUN cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION && make install && make clean
