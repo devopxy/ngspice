@@ -24,18 +24,11 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && rm ngspice.tar.gz \
     && cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
     && ./autogen.sh \
-    && ./configure \
-    && make 
+    && ./configure --prefix=/usr/local\
+    && make && make install 
     
 FROM alpine:3.7 as final
     
-ENV NGSPICE_VERSION 28
- 
-COPY --from=build /usr/src/ngspice-ngspice-$NGSPICE_VERSION /usr/src/ngspice-ngspice-$NGSPICE_VERSION
+COPY --from=build /usr/local /usr/local
     
-RUN apk add --no-cache --virtual .build-deps make \
-    && cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
-    && make install  \
-    && rm -rf /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
-    && apk del make
 USER ngspice
