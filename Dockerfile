@@ -25,10 +25,14 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
     && ./autogen.sh \
     && ./configure --prefix=/usr/local\
-    && make && make install 
+    && make && make install \
+    && make clean \
+    && apk del
+    autoconf \
+    automake \
+    flex \
+    g++ \
+    libx11-dev \
+    libxaw-dev \
+    libtool 
     
-FROM alpine:3.7 as final
-    
-COPY --from=build /usr/local /usr/local
-    
-USER ngspice
