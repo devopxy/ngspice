@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.7 as build
 
 LABEL maintainer="Mangesh Bhalerao <mangesh {at} devopxy {dot} com >"
 
@@ -25,5 +25,8 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
     && ./autogen.sh \
     && ./configure \
-    && make \
-    && make install && make clean
+    && make 
+    
+    FROM alpine:3.7 as final
+    COPY --from=build /usr/src/ngspice-ngspice-$NGSPICE_VERSION /usr/src/ngspice-ngspice-$NGSPICE_VERSION
+    RUN cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION && make install && make clean
