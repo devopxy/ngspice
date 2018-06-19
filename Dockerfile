@@ -4,8 +4,6 @@ LABEL maintainer="Mangesh Bhalerao <mangesh {at} devopxy {dot} com >"
 
 ENV NGSPICE_VERSION 28
 
-RUN echo $NGSPICE_VERSION
-
 RUN apk add --no-cache --virtual .build-deps \
     autoconf \
     automake \
@@ -17,8 +15,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libxaw-dev \
     libtool \
     make
-
-RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.tar.gz -o ngspice.tar.gz \
+    && curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.tar.gz -o ngspice.tar.gz \
     && mkdir -p /usr/src \
     && tar -zxC /usr/src -f ngspice.tar.gz \
     && rm ngspice.tar.gz \
@@ -30,6 +27,7 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && apk del \
     autoconf \
     automake \
+    curl \
     flex \
     g++ \
     libx11-dev \
