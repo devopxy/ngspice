@@ -27,7 +27,7 @@ RUN curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.ta
     && ./configure --prefix=/usr/local\
     && make && make install \
     && make clean \
-    && apk del
+    && apk del \
     autoconf \
     automake \
     flex \
