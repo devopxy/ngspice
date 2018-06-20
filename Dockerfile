@@ -21,17 +21,13 @@ RUN apk add --no-cache --virtual .build-deps \
     && rm ngspice.tar.gz \
     && cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
     && ./autogen.sh \
-    && ./configure --prefix=/usr/local\
+    && ./configure \
     && make && make install \
     && make clean \
-    && rm -rf cd /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
+    && rm -rf  /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
     && apk del \
     autoconf \
     automake \
     curl \
-    flex \
     g++ \
-    libx11-dev \
-    libxaw-dev \
-    libtool 
-    
+    make
