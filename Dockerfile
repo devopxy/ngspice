@@ -14,7 +14,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libx11-dev \
     libxaw-dev \
     libtool \
-    make
+    make \
     && curl -fSL https://github.com/imr/ngspice/archive/ngspice-$NGSPICE_VERSION.tar.gz -o ngspice.tar.gz \
     && mkdir -p /usr/src \
     && tar -zxC /usr/src -f ngspice.tar.gz \
