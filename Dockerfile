@@ -23,11 +23,5 @@ RUN apk add --no-cache --virtual .build-deps \
     && ./autogen.sh \
     && ./configure \
     && make && make install \
-    && make clean \
     && rm -rf  /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
-    && apk del \
-    autoconf \
-    automake \
-    curl \
-    g++ \
-    make
+    && apk del .build-deps
