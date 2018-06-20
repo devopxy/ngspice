@@ -24,4 +24,5 @@ RUN apk add --no-cache --virtual .build-deps \
     && ./configure \
     && make && make install \
     && rm -rf  /usr/src/ngspice-ngspice-$NGSPICE_VERSION \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && apk add libx11 libxaw
